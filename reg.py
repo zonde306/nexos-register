@@ -1260,23 +1260,20 @@ async def register():
         except:
             ...
         
-        print("Clicking skip tutorial...")
-        skip_tutorial_selector = [
-            "xpath=//*[text()='Skip & Close']"
-        ]
-        try:
-            await click_btn(skip_tutorial_selector, 15000)
-        except:
-            ...
-        
-        print("Clicking welcome close...")
-        welcome_selector = [
-            "button.top-4.right-4"
-        ]
-        try:
-            await click_btn(welcome_selector, 10000)
-        except:
-            ...
+        # 等待页面加载
+        await asyncio.sleep(10)
+
+        for _ in range(2):
+            print("Close popup...")
+            skip_tutorial_selector = [
+                "xpath=//*[text()='Skip & Close']",
+                "button.top-4.right-4",
+            ]
+            try:
+                await click_btn(skip_tutorial_selector, 5000)
+                await page.keyboard.press("Escape")
+            except:
+                ...
         
         print("Clicking model choose...")
         model_choose_selector = [
@@ -1287,6 +1284,8 @@ async def register():
         except:
             ...
         
+        await asyncio.sleep(0.5)
+
         print("Clicking model list...")
         model_list_selector = [
             "xpath=//*[text()='All models and agents']"
@@ -1296,6 +1295,7 @@ async def register():
         except:
             ...
 
+        await asyncio.sleep(1)
         model_mapping = await get_model_mapping(page)
 
         # 保存账号信息（包含cookie字符串、字典和chat ID）
