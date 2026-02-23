@@ -120,7 +120,9 @@ def find_checkbox_in_screenshot(screenshot_path: str, debug=False) -> tuple:
         # 171035.png 为 Turnstile 条形区域（约 380x65），复选框中心相对偏移约 (30, 32)
         template_paths = [
             Path("171035.png"),
+            Path("131517.png"),
             Path(__file__).resolve().parent / "171035.png",
+            Path(__file__).resolve().parent / "131517.png",
         ]
         template_path = next((p for p in template_paths if p.exists()), None)
 
